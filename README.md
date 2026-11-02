@@ -1,166 +1,249 @@
 # Sales Performance Analysis & Business Insights Dashboard
 
-An end-to-end Data Analyst portfolio project using Python, PostgreSQL, and Tableau. The project analyzes a fictional retail company's orders to understand sales performance, profitability, customer segments, discount patterns, and shipping efficiency.
+An end-to-end Data Analyst portfolio project using Python, PostgreSQL, SQL, and Tableau. This project analyzes a fictional retail company's sales data to identify business trends, evaluate profitability, understand customer segments, examine discount patterns, and analyze shipping performance.
 
-## Business problem
+## Project Overview
 
-Management needs clear answers to:
-- Which regions and categories drive sales and profit?
-- Which sub-categories lose money?
-- How do sales and profit change month by month?
-- How does discount level relate to profitability?
-- Which customers contribute the most sales?
-- How does delivery time vary by shipping mode?
+The objective of this project is to transform raw retail sales data into meaningful business insights using data cleaning, exploratory data analysis, SQL queries, and interactive visualization.
 
-## Tech stack
+## Business Problems
 
-- Python: Pandas, NumPy, Matplotlib, Seaborn
-- Database: PostgreSQL
-- BI: Tableau
-- Version control: Git and GitHub
+This project answers the following business questions:
+
+- Which regions generate the highest sales and profit?
+- Which product categories and sub-categories are most profitable?
+- Which products or sub-categories generate losses?
+- How do sales and profit change over time?
+- How do discount levels relate to profitability?
+- Who are the top customers based on sales?
+- How does delivery performance vary by shipping mode?
+
+## Tech Stack
+
+- **Programming:** Python
+- **Python Libraries:** Pandas, NumPy, Matplotlib, Seaborn
+- **Database:** PostgreSQL
+- **Query Language:** SQL
+- **Business Intelligence:** Tableau
+- **Tools:** VS Code, pgAdmin, Git, GitHub
 
 ## Dataset
 
-Download the **Sample - Superstore.csv** dataset from:
-https://www.kaggle.com/datasets/vivek468/superstore-dataset-final
+**Dataset:** Sample Superstore Dataset
 
-Place it at `data/Sample - Superstore.csv`.
+Source: [Kaggle – Sample Superstore Dataset](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final)
 
-This is sample/fictionalized retail data for learning and portfolio demonstration, not proprietary company data. The commonly shared CSV has approximately 10,000 line-item records. Verify the actual row count and date range after downloading.
+The dataset contains fictionalized retail sales information, including orders, customers, products, sales, profit, discounts, regions, and shipping details.
 
-## Repository structure
+The original CSV is not included in this GitHub repository. Download it and place it inside the `data/` folder.
+
+Expected filename: `Sample - Superstore.csv`
+
+## Project Structure
 
 ```text
 sales-performance-analytics/
+│
 ├── data/
 │   └── .gitkeep
+│
 ├── reports/
 │   └── .gitkeep
+│
 ├── src/
 │   ├── 01_clean_analyze.py
 │   └── 02_load_postgres.py
+│
 ├── sql/
 │   └── analysis_queries.sql
+│
 ├── tableau/
+│   ├── README.txt
 │   └── dashboard_build_guide.md
+│
+├── business_insights.py
+├── eda_analysis.py
+├── load_data.py
+├── test_db_connection.py
+├── visualize_sales.py
+│
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
-## Setup and run
+## Project Workflow
 
-### 1. Clone the repository
+### 1. Data Collection
+
+Downloaded the Sample Superstore dataset from Kaggle and prepared it for analysis.
+
+### 2. Data Cleaning and Exploratory Data Analysis
+
+Used Python and Pandas to examine the dataset, check missing values, identify duplicate records, inspect data types, and understand the overall data structure.
+
+### 3. PostgreSQL Database Integration
+
+Created a PostgreSQL database named `sales_analytics` and loaded the sales records into the `public.sales_clean` table.
+
+Used SQLAlchemy, psycopg2, and python-dotenv for database connectivity.
+
+### 4. SQL Analysis
+
+Created SQL queries to analyze:
+
+- Overall business KPIs
+- Regional sales and profitability
+- Category and sub-category performance
+- Monthly sales trends
+- Discount and profit relationships
+- Top 10 customers
+- Top 5 products by region using window functions
+- Shipping performance
+- Summary view for Tableau
+
+### 5. Data Visualization
+
+Used Python Matplotlib to generate charts for:
+
+- Monthly sales trends
+- Regional sales performance
+- Category sales and profit
+- Customer segment sales
+
+### 6. Tableau Dashboard
+
+Developed and published an interactive dashboard containing KPI summaries, monthly sales trends, regional performance, category analysis, profit analysis, and top-performing products.
+
+**View the published dashboard:**
+
+[Sales Performance Analysis Dashboard – Tableau Public](https://public.tableau.com/app/profile/shyam.b7714/viz/SalesPerformanceAnalysisDashboard_17936272431160/SalesPerformanceDashboard)
+
+## Key Business Insights
+
+The following findings were obtained from the completed analysis:
+
+| Business Metric | Result |
+|---|---:|
+| Total Sales | $2,297,200.86 |
+| Total Profit | $286,397.02 |
+| Profit Margin | 12.47% |
+| Total Orders | 5,009 |
+| Unique Customers | 793 |
+| Unique Products | 1,862 |
+| Units Sold | 37,873 |
+
+### Important Findings
+
+- The West region generated the highest sales, approximately $725,457.82.
+- Technology generated the highest category profit, approximately $145,454.95.
+- Furniture Tables recorded a loss of approximately $17,725.48.
+- Discounts above 30% were associated with a total loss of approximately $125,006.78.
+- Consumer customers contributed the highest sales among the customer segments.
+- Annual sales increased from approximately $484,247.50 in 2014 to $733,215.26 in 2017.
+
+### Business Recommendations
+
+- Review high-discount products that generate negative profit.
+- Focus on improving the profitability of the Furniture category.
+- Analyze regional differences in sales and profit margins.
+- Identify opportunities to improve customer retention and sales.
+- Monitor shipping performance across different shipping modes.
+
+These recommendations are based on observed patterns in the sample dataset. Discount relationships should not be interpreted as proof of causation.
+
+## How to Run the Project
+
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/sales-performance-analytics.git
+git clone https://github.com/Shyam202004/sales-performance-analytics.git
 cd sales-performance-analytics
 ```
 
-### 2. Create a virtual environment
+### 2. Create a Virtual Environment
 
-Windows:
+For Windows:
+
 ```bash
 python -m venv .venv
-.venv\\Scripts\\activate
+.venv\Scripts\activate
 ```
 
-macOS/Linux:
+For macOS/Linux:
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Add the dataset
+### 4. Add the Dataset
 
-Download the Kaggle CSV and place it in `data/` with the exact name:
-`Sample - Superstore.csv`
+Download the Sample Superstore CSV from Kaggle and place it inside the `data/` folder.
 
-### 5. Clean and analyze
+### 5. Configure PostgreSQL
 
-```bash
-python src/01_clean_analyze.py
+Create a PostgreSQL database named:
+
+```text
+sales_analytics
 ```
 
-This creates:
-- `data/superstore_clean.csv`
-- `reports/data_quality_report.txt`
-- `reports/region_summary.csv`
-- `reports/product_profitability.csv`
-- `reports/monthly_trend.csv`
-- `reports/eda_overview.png`
+Copy `.env.example` to `.env` and configure your local PostgreSQL connection details.
 
-### 6. Configure PostgreSQL
+Never upload your actual `.env` file or database password to GitHub.
 
-Create a database named `superstore_db` in pgAdmin or psql.
-
-Copy `.env.example` to `.env`, then update the local credentials. Never commit `.env`.
+### 6. Run the Python Scripts
 
 ```bash
-python src/02_load_postgres.py
+python test_db_connection.py
+python load_data.py
+python eda_analysis.py
+python business_insights.py
+python visualize_sales.py
 ```
 
-The script loads the cleaned records into `public.sales_clean`.
+### 7. Execute SQL Queries
 
-### 7. Run SQL analysis
+Open `sql/analysis_queries.sql` in pgAdmin Query Tool and execute the queries to explore sales performance and business insights.
 
-Open `sql/analysis_queries.sql` in pgAdmin Query Tool or run it with psql. It includes:
-- KPI aggregation
-- Region and product profitability
-- Monthly trend analysis
-- Discount band analysis
-- Top customers
-- Window-function ranking
-- Shipping performance
-- Tableau view creation
+### 8. View the Tableau Dashboard
 
-### 8. Build Tableau dashboard
+Open the published dashboard:
 
-Follow `tableau/dashboard_build_guide.md`. Connect Tableau to PostgreSQL and select `public.vw_sales_summary`.
+[View Sales Performance Dashboard](https://public.tableau.com/app/profile/shyam.b7714/viz/SalesPerformanceAnalysisDashboard_17936272431160/SalesPerformanceDashboard)
 
-Save the packaged workbook as:
-`tableau/Sales_Performance_Dashboard.twbx`
+## Important Analysis Notes
 
-## Key deliverables
+- Each dataset row represents an order line item, not necessarily a unique order.
+- Use distinct order counts when calculating total orders.
+- Negative-profit records are retained because they are important for profitability analysis.
+- Overall profit margin is calculated using total profit divided by total sales.
+- Discount relationships indicate association, not necessarily causation.
+- The dataset is fictionalized sample data and does not represent actual company financial information.
 
-- Reproducible Python data preparation and EDA scripts
-- PostgreSQL analysis queries
-- Tableau dashboard with executive, product, and customer/operations views
-- Business recommendations based on measured results
+## Skills Demonstrated
 
-## Analysis notes
+- Python Programming
+- Data Cleaning and Exploratory Data Analysis
+- SQL Query Writing
+- PostgreSQL Database Management
+- Data Visualization
+- Tableau Dashboard Development
+- Business Intelligence and Analytical Thinking
+- Git and GitHub Version Control
 
-- Dataset grain: one row represents an order line item, not necessarily one unique order. Use `COUNTD(Order ID)` for order counts.
-- Profit can be negative. Do not remove negative-profit rows; they are important to the business problem.
-- Profit margin should be calculated as `SUM(Profit) / SUM(Sales)`, not as an unweighted average of row-level margins.
-- Discount association is not proof of causation. Describe it as an observed relationship.
-- Do not write findings in this README until you have run the analysis and verified the actual outputs.
+## Author
 
-## Example business recommendations to evaluate
+**Shyam B**
 
-- Review high-discount product groups with weak or negative profit.
-- Prioritize profitable product and regional combinations.
-- Investigate regions with strong sales but low profit margins.
-- Review shipping options where delivery time is high.
+GitHub: [https://github.com/Shyam202004](https://github.com/Shyam202004)
 
-Only include recommendations that your actual analysis supports.
-
-## GitHub upload
-
-```bash
-git init
-git add .
-git commit -m "Build end-to-end retail sales analytics project"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/sales-performance-analytics.git
-git push -u origin main
-```
-
-Before pushing, confirm that `.env`, raw customer-level data, and generated files you do not intend to share are excluded. Check `git status` and `git ls-files` before publishing.
+Project Repository: [Sales Performance Analytics](https://github.com/Shyam202004/sales-performance-analytics)
